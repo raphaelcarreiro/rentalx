@@ -6,11 +6,15 @@ class CreateCategoryController {
   constructor(private createCategoryUseCase: CreateCategoryUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    const { name, description } = request.body;
+    try {
+      const { name, description } = request.body;
 
-    this.createCategoryUseCase.execute({ name, description });
+      const category = this.createCategoryUseCase.execute({ name, description });
 
-    return response.status(201).json();
+      return response.status(201).json(category).send();
+    } catch (err) {
+      return response.status(500).json({ error: err.message });
+    }
   }
 }
 

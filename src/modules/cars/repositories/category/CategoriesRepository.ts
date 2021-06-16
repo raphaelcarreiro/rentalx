@@ -16,7 +16,7 @@ class CategoriesRepository implements ICategoriesRepository {
     return CategoriesRepository.INSTANCE;
   }
 
-  create({ description, name }: ICreateCategoryDTO): void {
+  create({ description, name }: ICreateCategoryDTO): Category {
     const category = new Category();
 
     Object.assign(category, {
@@ -26,6 +26,8 @@ class CategoriesRepository implements ICategoriesRepository {
     });
 
     this.categories.push(category);
+
+    return category;
   }
 
   list(): Category[] {
