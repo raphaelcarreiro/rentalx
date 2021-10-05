@@ -1,7 +1,8 @@
 import csvParse from "csv-parse";
 import fs from "fs";
+import { inject, injectable } from "tsyringe";
 
-import { Category } from "../../model/Category";
+import { Category } from "../../entities/Category";
 import { CategoriesRepository } from "../../repositories/category/CategoriesRepository";
 
 interface IImportCategory {
@@ -9,12 +10,16 @@ interface IImportCategory {
   description: string;
 }
 
+@injectable()
 class ImportCategoryUseCase {
-  constructor(private categoryRepository: CategoriesRepository) {
+  constructor(
+    @inject("CategoriesRepository")
+    private categoryRepository: CategoriesRepository,
+  ) {
     //
   }
 
-  loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
+  async loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
 
@@ -27,6 +32,7 @@ class ImportCategoryUseCase {
       parsedFile
         .on("data", async line => {
           const [name, description] = line;
+          await this.categoryRepository.create({ description, name });
           categories.push({ name, description });
         })
         .on("end", () => {
@@ -45,14 +51,12 @@ class ImportCategoryUseCase {
     const categories = await this.loadCategories(file);
     const createdCategories: Category[] = [];
 
-    categories.forEach(category => {
-      if (!this.categoryRepository.findByName(category.name)) {
-        const created = this.categoryRepository.create(category);
-        createdCategories.push(created);
+    categories.forEach(async category => {
+      const categoryName = await this.categoryRepository.findByName(category.name);
+      if (!categoryName) {
+        await this.categoryRepository.create(category);
       }
     });
-
-    console.log(createdCategories);
 
     return createdCategories;
   }

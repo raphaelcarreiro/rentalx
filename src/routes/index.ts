@@ -12,6 +12,6 @@ router.get("/", (request, response) => {
 router.use(categoriesRoutes);
 router.use(specificationsRoutes);
 
-console.log("teste");
+// console.log("teste");
 
 export { router };
