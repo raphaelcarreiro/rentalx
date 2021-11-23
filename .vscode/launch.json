@@ -9,7 +9,8 @@
       "request": "attach",
       "name": "NodeJs Debug",
       "skipFiles": ["<node_internals>/**"],
-      "outFiles": ["${workspaceFolder}/**/*.js"]
+      "outFiles": ["${workspaceFolder}/**/*.js"],
+      "remoteRoot": "/usr/app"
     }
   ]
 }
