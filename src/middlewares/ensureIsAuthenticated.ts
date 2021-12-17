@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
 import { AppError } from "../errors/AppError";
-import { User } from "../modules/accounts/entities/User";
-import { UsersRepository } from "../modules/accounts/repositories/UsersRepository";
+import { User } from "../modules/accounts/infra/typeorm/entities/User";
+import { UsersRepository } from "../modules/accounts/infra/typeorm/repositories/UsersRepository";
 
 export async function ensureIsAuthenticated(request: Request, response: Response, next: NextFunction): Promise<void> {
   const token = getToken(request);
@@ -28,8 +28,7 @@ function getToken(request: Request) {
     throw new AppError("Invalid token", 401);
   }
 
-  const token = authorization.replace("Bearer", "").trim();
-  return token;
+  return authorization.replace("Bearer", "").trim();
 }
 
 async function verifyToken(token: string): Promise<User> {
