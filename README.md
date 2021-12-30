@@ -36,3 +36,20 @@ O usuário responsável pelo cadastro deve ser um usuário administrador.
 
 **RF**
 Deve ser possível cadastrar imagem
+
+**RNF**
+Utilizar o multer para upload de arquivos
+
+**RN**
+O usuário deve poder cadastrar mais de uma imagem para o mesmo carro
+O usuário responsável pelo cadastro deve ser um usuário administrador
+
+# Aluguel de carro
+
+**RF**
+Deve ser possível cadastrar um aluguel
+
+**RN**
+O aluguel deve ter duração mínima de 24 horas.
+Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo usuário
+Não deve ser possível cadastrar um novo alguel caso já exista um anerto para o mesmo carro
