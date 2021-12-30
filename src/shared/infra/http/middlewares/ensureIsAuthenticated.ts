@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
-import { AppError } from "../errors/AppError";
-import { User } from "../modules/accounts/infra/typeorm/entities/User";
-import { UsersRepository } from "../modules/accounts/infra/typeorm/repositories/UsersRepository";
+import { User } from "../../../../modules/accounts/infra/typeorm/entities/User";
+import { UsersRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersRepository";
+import { AppError } from "../../../errors/AppError";
 
 export async function ensureIsAuthenticated(request: Request, response: Response, next: NextFunction): Promise<void> {
   const token = getToken(request);

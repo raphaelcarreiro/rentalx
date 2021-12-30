@@ -3,7 +3,7 @@ import fs from "fs";
 import { inject, injectable } from "tsyringe";
 
 import { Category } from "../../infra/typeorm/entities/Category";
-import { CategoriesRepository } from "../../repositories/category/CategoriesRepository";
+import { CategoriesRepository } from "../../infra/typeorm/repositories/CategoriesRepository";
 
 interface IImportCategory {
   name: string;
