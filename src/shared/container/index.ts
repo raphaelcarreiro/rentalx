@@ -1,4 +1,6 @@
+import { CarRepository } from "@src/modules/cars/infra/typeorm/repositories/CarRepository";
 import { SpecificationRepository } from "@src/modules/cars/infra/typeorm/repositories/SpecificationRepository";
+import { ICarRepository } from "@src/modules/cars/repositories/ICarRepository";
 import { container } from "tsyringe";
 
 import "reflect-metadata";
@@ -12,3 +14,4 @@ import { ISpecificationsRepository } from "../../modules/cars/repositories/ISpec
 container.registerSingleton<ICategoriesRepository>("CategoriesRepository", CategoriesRepository);
 container.registerSingleton<ISpecificationsRepository>("SpecificationRepository", SpecificationRepository);
 container.registerSingleton<IUsersRepository>("UsersRepository", UsersRepository);
+container.registerSingleton<ICarRepository>("CarRepository", CarRepository);
