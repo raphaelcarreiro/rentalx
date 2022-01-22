@@ -1,14 +1,14 @@
 import { AppError } from "@src/shared/errors/AppError";
 
-import { CarRepositoruInMemory } from "../../repositories/in-memory/CarRepositoryInMemory";
+import { CarRepositoryInMemory } from "../../repositories/in-memory/CarRepositoryInMemory";
 import { CreateCarUseCase } from "./CreateCarUseCase";
 
 let createCarUseCase: CreateCarUseCase;
-let carRepository: CarRepositoruInMemory;
+let carRepository: CarRepositoryInMemory;
 
-describe("Create Card", () => {
+describe("Create Car", () => {
   beforeEach(() => {
-    carRepository = new CarRepositoruInMemory();
+    carRepository = new CarRepositoryInMemory();
 
     createCarUseCase = new CreateCarUseCase(carRepository);
   });

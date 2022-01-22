@@ -2,7 +2,7 @@ import { ICreateCarDto } from "../../dtos/ICreateCarDto";
 import { Car } from "../../infra/typeorm/entities/Car";
 import { ICarRepository } from "../ICarRepository";
 
-export class CarRepositoruInMemory implements ICarRepository {
+export class CarRepositoryInMemory implements ICarRepository {
   private cars: Car[] = [];
 
   async create(payload: ICreateCarDto): Promise<Car> {
